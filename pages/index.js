@@ -1,9 +1,10 @@
 import React from 'react'
 
 const index = () => {
-  return (
-    <div>todo list</div>
-  )
+
+    return (
+        <div>todo</div>
+    )
 }
 
 export default index
