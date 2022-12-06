@@ -1,0 +1,52 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    color: #777;
+    background-color: white;
+    position: relative;
+    z-index: 1;
+}
+
+
+.linkBar {
+    display: flex;
+    gap: 5px;
+}
+
+.link {
+    text-decoration: none;
+    border: 1px solid transparent;
+    padding: 3px 7px;
+    border-radius: 3px;
+    color: inherit;
+}
+
+.active {
+    text-decoration: none;
+    border: 1px solid #cfcfcf;
+    padding: 3px 7px;
+    border-radius: 3px;
+    color: inherit;
+}
+
+.clearButton {
+    background-color: transparent;
+    border: none;
+    color: #777;
+    font-size: 15px;
+}
+
+.hideButton {
+    opacity: 0;
+    background-color: transparent;
+    border: none;
+    color: #777;
+    font-size: 15px;
+}
+
+.clearButton:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

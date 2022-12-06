@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import styles from '../styles/Layout.module.css'
+import Footer from './Footer'
 import Input from './Input'
 
 const Layout = ({ children, keywords, title }) => {
@@ -15,6 +16,7 @@ const Layout = ({ children, keywords, title }) => {
                 <div className={styles.wrapper}>
                     {children}
                 </div>
+                <Footer />
             </section>
         </main>
     )
