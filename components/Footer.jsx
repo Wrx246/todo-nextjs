@@ -32,7 +32,7 @@ const Footer = () => {
 
     return (
         <footer className={styles.footer}>
-            <span>{notCompleteTodos} items left</span>
+            <span>{notCompleteTodos} {notCompleteTodos === 1 ? 'item' : 'items'} left</span>
             <nav className={styles.linkBar}>
                 {paths.map((item) => {
                     const active = item.path === pathname ? styles.active : '';
