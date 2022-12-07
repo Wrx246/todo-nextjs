@@ -11,7 +11,7 @@ const Input = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(value === '') {
+        if (value === '') {
             return;
         }
         setTodos([...todos, { id: Date.now(), name: value, isComplete: false }]);
@@ -36,15 +36,18 @@ const Input = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.checkboxWrapper}>
-                <label className={styles.label} htmlFor="toggle">
-                    <input
-                        onChange={onCompleteAll}
-                        className={styles.checkbox}
-                        checked={checkAll}
-                        type="checkbox"
-                        id='toggle' />
-                    <span className={styles.fake}></span>
-                </label>
+                {todos.length !== 0 ?
+                    <label className={styles.label} htmlFor="toggle">
+                        <input
+                            onChange={onCompleteAll}
+                            className={styles.checkbox}
+                            checked={checkAll}
+                            type="checkbox"
+                            id='toggle' />
+                        <span className={styles.fake}></span>
+                    </label>
+                    : <></>
+                }
             </div>
             <input
                 {...bind}

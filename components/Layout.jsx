@@ -1,9 +1,12 @@
 import Head from 'next/head'
+import { useContext } from 'react'
+import { TodoContext } from '../assets/data/TodoData'
 import styles from '../styles/Layout.module.css'
 import Footer from './Footer'
 import Input from './Input'
 
 const Layout = ({ children, keywords, title }) => {
+    const [todos] = useContext(TodoContext);
     return (
         <main className={styles.layout}>
             <Head>
@@ -16,7 +19,7 @@ const Layout = ({ children, keywords, title }) => {
                 <div className={styles.wrapper}>
                     {children}
                 </div>
-                <Footer />
+                {todos.length !== 0 ? <Footer /> : <></>}
             </section>
         </main>
     )
