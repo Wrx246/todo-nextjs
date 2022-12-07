@@ -33,6 +33,10 @@
     color: #cfcfcf;
 }
 
+.label {
+    width: 30px;
+}
+
 .checkbox {
     display: none;
 }
