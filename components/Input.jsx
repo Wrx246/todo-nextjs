@@ -1,16 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from '../styles/Input.module.css'
 import { TodoContext } from '../assets/data/TodoData';
+import useInput from '../hooks/useInput';
 
 const Input = () => {
     const [todos, setTodos] = useContext(TodoContext)
-    const [todoName, setTodoName] = useState('');
     const [checkAll, setCheckAll] = useState(false);
+
+    const [value, bind, reset] = useInput('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setTodos([...todos, { id: Date.now(), name: todoName, isComplete: false }]);
-        setTodoName('');
+        if(value === '') {
+            return;
+        }
+        setTodos([...todos, { id: Date.now(), name: value, isComplete: false }]);
+        reset()
     }
 
     useEffect(() => {
@@ -42,8 +47,7 @@ const Input = () => {
                 </label>
             </div>
             <input
-                value={todoName}
-                onChange={e => setTodoName(e.target.value.toLowerCase())}
+                {...bind}
                 className={styles.input}
                 type='text'
                 placeholder='What needs to be done?' />

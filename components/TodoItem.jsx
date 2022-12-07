@@ -1,32 +1,25 @@
 import { useRef, useState } from 'react'
 import useHover from '../hooks/useHover'
+import useInput from '../hooks/useInput'
 import styles from '../styles/TodoItem.module.css'
 
 const TodoItem = ({ id, name, isComplete, onCheckComplete, onEditValue, onDeleteButton }) => {
     const [onEdit, setOnEdit] = useState(false)
-    const [editValue, setEditValue] = useState(name)
 
     const ref = useRef();
 
     const isHover = useHover(ref)
 
+    const [value, bind, reset] = useInput(name)
+
     const handleClick = () => {
         setOnEdit(true)
     }
 
-    const handleEdit = () => {
-        if (editValue) {
-            onEditValue(editValue, id)
-            setOnEdit(false)
-        } else {
-            setEditValue(name)
-            setOnEdit(false)
-        }
-    }
-
     const handleChange = (e) => {
-        if (e.key === 'Enter') {
-            handleEdit()
+        if (e.key === 'Enter' && value) {
+            onEditValue(value, id)
+            setOnEdit(false)
         }
     }
 
@@ -55,9 +48,8 @@ const TodoItem = ({ id, name, isComplete, onCheckComplete, onEditValue, onDelete
                 {
                     onEdit ?
                         <input
-                            value={editValue}
+                            {...bind}
                             onKeyDown={handleChange}
-                            onChange={e => setEditValue(e.target.value)}
                             className={styles.input}
                             type='text' />
                         : <p className={isComplete ? styles.completedItem : ''} onDoubleClick={handleClick}>{name}</p>
