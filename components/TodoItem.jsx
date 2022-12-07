@@ -1,10 +1,14 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
+import useHover from '../hooks/useHover'
 import styles from '../styles/TodoItem.module.css'
 
 const TodoItem = ({ id, name, isComplete, onCheckComplete, onEditValue, onDeleteButton }) => {
     const [onEdit, setOnEdit] = useState(false)
     const [editValue, setEditValue] = useState(name)
-    const [onHover, setOnHover] = useState(false)
+
+    const ref = useRef();
+
+    const isHover = useHover(ref)
 
     const handleClick = () => {
         setOnEdit(true)
@@ -30,21 +34,13 @@ const TodoItem = ({ id, name, isComplete, onCheckComplete, onEditValue, onDelete
         onCheckComplete(id)
     }
 
-    const onHandleHover = () => {
-        setOnHover(true)
-    }
-
-    const onHandleLeave = () => {
-        setOnHover(false)
-    }
-
     const onHandleDelete = () => {
         onDeleteButton(id)
     }
 
 
     return (
-        <li className={styles.itemWrapper} onMouseOver={onHandleHover} onMouseLeave={onHandleLeave}>
+        <li className={styles.itemWrapper} ref={ref}>
             <label htmlFor={id} className={styles.label}>
                 <input
                     value=""
@@ -66,7 +62,7 @@ const TodoItem = ({ id, name, isComplete, onCheckComplete, onEditValue, onDelete
                             type='text' />
                         : <p className={isComplete ? styles.completedItem : ''} onDoubleClick={handleClick}>{name}</p>
                 }
-                {onHover && <button type='button' onClick={onHandleDelete} className={styles.deleteButton}>x</button>}
+                {isHover && <button type='button' onClick={onHandleDelete} className={styles.deleteButton}>x</button>}
             </div>
         </li>
     )
